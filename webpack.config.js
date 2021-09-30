@@ -91,7 +91,7 @@ module.exports = {
 
     output: {
         //filename: '[name].js',
-        filename: '[name]_[contenthash:8].js',
+        filename: '[name]_[hash:8].js',
         //chunkFilename: '[name].[chunkhash:8].js',
         path: __dirname + "/dist" //指定资源的输出位置
     },
