@@ -1,11 +1,9 @@
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
-const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin')
 
-const myplugin = require('./lib/loader/plugin1')
 const CompressWebpackPlugin = require('compression-webpack-plugin');
 
 
@@ -15,9 +13,7 @@ module.exports = {
 
     devtool: 'source-map', //开启sourcemap
     entry: {
-        "index": "./src/index.js", //可以定义多个入口,
-        "index2": "./src/index2.js", //可以定义多个入口,
-        //"page":"./src/page.js"
+        "index": "./src/index.js"
     },
     module: {
         rules: [{
@@ -29,15 +25,7 @@ module.exports = {
                     plugins: ['transform-class-properties']
                 }
             },
-            {
-                test: /\.js$/,
-                use: [{
-                    loader: path.resolve("lib/loader/loader1.js"),
-                    options: {
-                        message: "this is a message",
-                    }
-                }],
-            },
+
 
 
             /*  {
@@ -91,7 +79,7 @@ module.exports = {
 
     output: {
         //filename: '[name].js',
-        filename: '[name]_[hash:8].js',
+        filename: '[name].js',
         //chunkFilename: '[name].[chunkhash:8].js',
         path: __dirname + "/dist" //指定资源的输出位置
     },
@@ -119,11 +107,7 @@ module.exports = {
             threshold: 10240, // 达到10k才启用，资源过小没必要，而且解压也是有损耗
             minRatio: 0.6 //压缩最小比例下限
             // 其他参数使用默认
-          }),
-        new myplugin({
-            a:"1",
-            b:"2"
-        })
+          })
     ],
     devServer: {
         publicPath: "/dist",
